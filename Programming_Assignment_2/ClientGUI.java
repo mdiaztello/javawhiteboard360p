@@ -84,6 +84,7 @@ public class ClientGUI extends JFrame
 		String chatMessages = chatTextArea.getText() + "\n" + m;	
 		
 		chatTextArea.setText(chatMessages); //update chat message area
+		chatTextArea.setCaretPosition(chatTextArea.getText().length());
 		userTextField.setText("");//clear the user's message area for new input
 		
 	}
