@@ -21,23 +21,20 @@
  * relay messages to other relayers, who in turn relay the messages to their clients
  * ----------------------------------------------------------*/
 
-
 package Whiteboard;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
+// ***********************************************
+//Class: 		Client
+//Description: 	client sends and receives text messages 
+//				and whiteboard updates from other clients
 public class Client implements Serializable
 {
-
-	//fields
-	
 	private String clientName;	
 	private InetAddress myIP;
 	private int udpPort;
-	//private Message m; 
-	
-	//constructors
 	
 	public Client(String name)
 	{

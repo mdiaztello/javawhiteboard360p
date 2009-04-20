@@ -1,5 +1,8 @@
 package Whiteboard;
 
+// ***********************************************
+// constructor: ChatElement
+// description: contains centralserver ip and port
 public interface ChatElement
 {
 	static final String SERVER_NAME = "128.62.123.100"; //IP Address or host name Peter
