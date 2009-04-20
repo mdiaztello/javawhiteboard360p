@@ -125,7 +125,7 @@ public abstract class Tool implements Serializable {
 	public static final Tool[] TOOLS = { new MoveTool(), new FreehandTool(),
 			new LineTool(), new StraightLineTool(), new BoxTool(),
 			new FilledBoxTool(), new EllipseTool(), new FilledEllipseTool(),
-			new TextTool(), new GridTool() };
+			new TextTool(), new GridTool(), new EraseTool() };
 
 	public static final Tool RESET = new ResetTool();
 

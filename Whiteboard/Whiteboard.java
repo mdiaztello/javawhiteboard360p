@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+//***********************************************
+//Class: 		Whiteboard
+//Description: 	Whiteboard builds and updates the whiteboard based on mouse and key events
 public class Whiteboard extends Canvas implements MouseListener,
 		MouseMotionListener, KeyListener, ActionListener, WhiteboardContext {
 
@@ -60,6 +63,11 @@ public class Whiteboard extends Canvas implements MouseListener,
 			Color.lightGray, Color.white, Color.red, Color.orange,
 			Color.yellow, Color.green, Color.cyan, Color.blue, Color.magenta, };
 
+	// ***********************************************
+	// constructor: Whiteboard
+	// arguments:  	local event tracker
+	//				enable/disable read only
+	// description: enables listeners for this instance of whiteboard
 	public Whiteboard(Transport t, boolean readOnly) {
 		tr = t;
 		this.readOnly = readOnly;
@@ -70,6 +78,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 		setCursor(DRAW_CURSOR);
 	}
 
+	// ***********************************************
+	// method: 		buildWhiteboard
+	// arguments: 	frame containing title
+	// description: method that constructs the whiteboard
 	public void buildWhiteboard(Container topPanel) {
 		Panel bottomPanel 		= new Panel(new BorderLayout()), 
 			  bottomPanelFields = new Panel(new BorderLayout());
@@ -83,15 +95,19 @@ public class Whiteboard extends Canvas implements MouseListener,
 		// String sample="Java-Version: "+System.getProperty("java.version");
 		// String sample="MaxMemory: "+Runtime.getRuntime().maxMemory();
 		bottomPanelFields.add("Center", tf = new TextField(""));
-		Button undoButton;
+		/*Button undoButton;
 		bottomPanelFields.add("East", undoButton = new Button("Undo!"));
-		undoButton.addActionListener(this);
+		undoButton.addActionListener(this);*/
 		if (readOnly) {
 			tf.setText("Nur Lesezugriff gestattet");
 			tf.setEditable(false);
 		}
 	}
 
+	// ***********************************************
+	// method: 		getPreferredSize
+	// arguments: 	nonee
+	// description: returns the size of the canvas area
 	public Dimension getPreferredSize() {
 		return new Dimension(WIDTH + 20, HEIGHT);
 	}
@@ -105,6 +121,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 		return true;
 	}
 
+	// ***********************************************
+	// method: 		update
+	// arguments: 	abstract object to handle graphics
+	// description: updates the current state of the whiteboard
 	public void update(Graphics g) {
 		if (buffer == null)
 			buffer = createImage(getSize().width, getSize().height);
@@ -113,6 +133,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 		g.drawImage(buffer, 0, 0, this);
 	}
 
+	// ***********************************************
+	// method: 		paint
+	// arguments: 	abstract object to handle graphics
+	// description: creates the layout of the buttons and text field on the whiteboard
 	public void paint(Graphics g) {
 		if (g == null)
 			return;
@@ -140,6 +164,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 		}
 	}
 
+	// ***********************************************
+	// method: 		paintContents
+	// arguments: 	abstract object to handle graphics
+	// description: paints shape onto whiteboard if shape is present in buffer
 	public void paintContents(Graphics g) {
 		if (contentBuffer == null)
 			contentBuffer = createImage(getSize().width, getSize().height);
@@ -154,6 +182,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 			currentShape.paint(this, g);
 	}
 
+	// ***********************************************
+	// method: 		paintContents2
+	// arguments: 	abstract object to handle graphics
+	// description: clears the whiteboard and repaints all shapes
 	public void paintContents2(Graphics g) {
 		g.clearRect(0, 0, WIDTH + 20, HEIGHT);
 		xOffset = yOffset = 0;
@@ -172,11 +204,19 @@ public class Whiteboard extends Canvas implements MouseListener,
 		}
 	}
 
+	// ***********************************************
+	// method: 		addShape
+	// arguments: 	the shape to be added to the buffer
+	// description: adds the shape to the buffer
 	public void addShape(Tool.Shape s) {
 		myShapes.addElement(s);
 		tr.addShape(s);
 	}
 
+	// ***********************************************
+	// method: 		newShapesAvailable
+	// arguments: 	none
+	// description: if new shape are in the buffer, repaint the whiteboard
 	public void newShapesAvailable() {
 		repaint = true;
 		repaint();
@@ -184,6 +224,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 
 	// Mouse events
 
+	// ***********************************************
+	// method: 		mousePressed
+	// arguments: 	mouse event handler 
+	// description: updates whiteboard based on position of mouse when mouse button is pressed
 	public void mousePressed(MouseEvent evt) {
 		if (readOnly)
 			return;
@@ -211,6 +255,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 		repaint();
 	}
 
+	// ***********************************************
+	// method: 		mouseDragged
+	// arguments: 	mouse event handler 
+	// description: keeps track of mouse position while mouse button is pressed and has not been released
 	public void mouseDragged(MouseEvent evt) {
 		if (readOnly)
 			return;
@@ -222,6 +270,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 		}
 	}
 
+	// ***********************************************
+	// method: 		mouseReleased
+	// arguments: 	mouse event handler 
+	// description: adds the drawn shape to the buffer and sends change to all other clients on button release
 	public void mouseReleased(MouseEvent evt) {
 		if (readOnly)
 			return;
@@ -252,6 +304,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 		}
 	}
 
+	// ***********************************************
+	// method: 		mouseMoved
+	// arguments: 	mouse event handler 
+	// description: changes cursor based on cursor position
 	public void mouseMoved(MouseEvent evt) {
 		int x = evt.getX();
 		if (x <= 20) { // Icon bar
@@ -272,6 +328,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 
 	// keyboard events
 
+	// ***********************************************
+	// method: 		keyPressed
+	// arguments: 	keyboard event handler 
+	// description: cancels the drawing of a shape if ESC is pressed
 	public void keyPressed(KeyEvent evt) {
 		if (readOnly)
 			return;
@@ -284,6 +344,10 @@ public class Whiteboard extends Canvas implements MouseListener,
 	public void keyReleased(KeyEvent evt) {
 	}
 
+	// ***********************************************
+	// method: 		keyTyped
+	// arguments: 	keyboard event handler 
+	// description: allows user to access toolbar using the keyboard
 	public void keyTyped(KeyEvent evt) {
 		if (readOnly)
 			return;
@@ -302,12 +366,17 @@ public class Whiteboard extends Canvas implements MouseListener,
 	}
 
 	// Action listener
+	
+	// ***********************************************
+	// method: 		actionPerformed
+	// arguments: 	action event handler 
+	// description: removes the last drawn shaped from the whiteboard if 'undo' button pressed
 	public void actionPerformed(ActionEvent evt) {
-		if (myShapes.size() == 0)
+		//if (myShapes.size() == 0)
 			return;
-		Tool.Shape lastShape = (Tool.Shape) myShapes
+		/*Tool.Shape lastShape = (Tool.Shape) myShapes
 				.elementAt(myShapes.size() - 1);
 		tr.addShape(new Tool.DeleteShape(lastShape));
-		myShapes.removeElementAt(myShapes.size() - 1);
+		myShapes.removeElementAt(myShapes.size() - 1);*/
 	}
 }
