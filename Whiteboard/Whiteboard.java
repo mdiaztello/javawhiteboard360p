@@ -231,17 +231,17 @@ public class Whiteboard extends Canvas implements MouseListener,
 			currentShape.endPoint(this, x - xOffset, y - yOffset);
 			addShape(currentShape);
 			Client ourClient = ClientGUI.getClient();
-			System.out.println("THIS IS OUR CLIENT: "+ ourClient);
+			//System.out.println("THIS IS OUR CLIENT: "+ ourClient);
 			for (Client client : ClientGUI.getClientList())
 			{
 				if (client.equals(ourClient))
 				{
-					System.out.println("THEY ARE THE SAME");
+					//System.out.println("THEY ARE THE SAME");
 				}
 				else
 				{
 					ourClient.sendWhiteboardChange(currentShape, client);
-					System.out.println("CURRENT CLIENT: " + client);
+					//System.out.println("CURRENT CLIENT: " + client);
 				}
 				
 			}
