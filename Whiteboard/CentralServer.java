@@ -173,7 +173,6 @@ class Acceptor implements Runnable
 				System.out.println("We have a problem!");
 				System.exit(0);
 			}
-			//requestCS
 			boolean status = addClientToList(clientBeingServed);
 
 			if ( false == status )

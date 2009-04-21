@@ -105,7 +105,7 @@ public class ClientGUI extends JFrame
 		String chatMessages = chatTextArea.getText() + "\n" + m;	
 		
 		chatTextArea.setText(chatMessages); //update chat message area
-		chatTextArea.setCaretPosition(chatTextArea.getText().length());
+		chatTextArea.setCaretPosition(chatTextArea.getText().length());//this makes the text area autoscroll to the last message added
 		userTextField.setText("");//clear the user's message area for new input
 		
 	}
