@@ -86,9 +86,10 @@ public class ClientGUI extends JFrame
 	        System.out.print("Connect to server IP: ");
             str = in.readLine();
             serverip = str;
-            System.out.print("Port: ");
-            str = in.readLine();
-            serverport = Integer.parseInt(str);
+            //System.out.print("Port: ");
+            //str = in.readLine();
+            //serverport = Integer.parseInt(str);
+	    serverport = 3345; //Pre agreed upon port number, much the same as how web traffic is always on port 80
 	    } catch (IOException e) {}
 		
 		socket = new Socket(serverip, serverport); 					//create connection to the server

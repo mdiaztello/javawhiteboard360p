@@ -30,7 +30,7 @@ public class CentralServer
 		DatagramSocket udpSocket = new DatagramSocket();
 		ArrayList<Client> clientList = new ArrayList<Client>();
 		
-		WelcomeSocket = new ServerSocket(ChatElement.SERVER_PORT);
+		WelcomeSocket = new ServerSocket(3345);//our central server will ALWAYS use port 3345 for incoming traffic
 		// until the server is forcibly terminated, check to see if there are incoming TCP connections
 		while(true)
 		{
