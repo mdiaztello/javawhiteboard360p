@@ -2,6 +2,9 @@ package Whiteboard;
 
 import java.util.Vector;
 
+//***********************************************
+//Class: 		Transport
+//Description:	Handles the addition of shapes and the status of the whiteboard
 public abstract class Transport {
 
 	protected Whiteboard wb;

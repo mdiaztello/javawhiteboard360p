@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.*;
 
+//***********************************************
+//Class: 		Tool
+//Description:	Handles the various tools that the clients can use
 public abstract class Tool implements Serializable {
 
 	/**
@@ -11,6 +14,12 @@ public abstract class Tool implements Serializable {
 	 */
 	private static final long serialVersionUID = -4248334931809038291L;
 
+	// ***********************************************
+	// method: 		paint
+	// arguments: 	abstract object to handle graphics
+	//				
+	//				
+	// description: seperates the toolbar area from the rest of the whiteboard
 	public void paint(Graphics g, int pos, boolean active) {
 		g.setColor(Color.black);
 		g.drawLine(0, pos * 20 + 19, 20, pos * 20 + 19);
@@ -19,10 +28,25 @@ public abstract class Tool implements Serializable {
 		}
 	}
 
+	// ***********************************************
+	// method: 		createShape
+	// arguments: 	the whiteboard to be drawn too
+	//				x offset of the shape to be drawn
+	//				y offset of the shape to be drawn
+	//				color of the shape to be drawn
+	// description: begins the process of drawing the shape onto the whiteboard
 	public abstract Shape createShape(WhiteboardContext w, int x, int y, Color c);
 
+	// ***********************************************
+	// method: 		shapeFromString
+	// arguments: 	string representation of the shape to be drawn
+	// description: parses string representation into the individual components of the shape to be drawn
 	public abstract Shape shapeFromString(String s);
 
+	// ***********************************************
+	// method: 		getToolID
+	// arguments: 	none
+	// description: returns the ID of the tool
 	public abstract char getToolID();
 
 	public static abstract class Shape implements Serializable {

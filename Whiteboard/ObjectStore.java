@@ -2,16 +2,27 @@ package Whiteboard;
 
 import java.util.*;
 
+//***********************************************
+//Class: 		ObjectStore
+//Description: 	ObjectStore maintains the list of all the shapes currently on the whiteboard
 public class ObjectStore {
 
 	private Vector v = new Vector();
 	private boolean removeLast = false;
 	private Whiteboard wb;
 
+	// ***********************************************
+	// method: 		getAllShapes
+	// arguments: 	none
+	// description: returns the vector of shapes
 	public Vector getAllShapes() {
 		return v;
 	}
 
+	// ***********************************************
+	// method: 		add
+	// arguments: 	the shape to be added or deleted from the vector
+	// description: adds or removes a shape from the vector based on the first character of the argument given
 	public boolean add(String shape) {
 		if (removeLast) {
 			removeLast = false;
@@ -38,7 +49,7 @@ public class ObjectStore {
 		}
 	}
 
-	public void addTemp(String shape) {
+	/*public void addTemp(String shape) {
 		if (shape.startsWith("~"))
 			return;
 		if (!removeLast) {
@@ -48,8 +59,12 @@ public class ObjectStore {
 			removeLast = true;
 			v.addElement(ss);
 		}
-	}
+	}*/
 
+	// ***********************************************
+	// method: 		clear
+	// arguments: 	none
+	// description: clears the vector of all shapes
 	public void clear() {
 		v.clear();
 	}
